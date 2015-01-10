@@ -23,7 +23,6 @@
           (setq i (1+ i))))))))
 
 (defalias 'rw 'my-window/rotate-windows)
-(evil-leader/set-key "rw" 'my-window/rotate-windows)
 
 
 ;; Deal with stuff that opens to other window but doesn't switch focus so you can't quit immediately
@@ -38,7 +37,10 @@
     (quit-window)
     (other-window 0))))
 
-(evil-leader/set-key "Q" 'my-window/quit-in-other-window)
+(evil-leader/set-key
+  "Q" 'my-window/quit-in-other-window
+  "rw" 'my-window/rotate-windows
+  "b" 'mode-line-other-buffer)
 
 (provide 'init-windowmove)
 
