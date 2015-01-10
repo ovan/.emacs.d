@@ -35,6 +35,20 @@
 ;; Allow jumping to source
 (evil-define-key 'normal clojure-mode-map (kbd "M-.") 'cider-jump)
 
+;; Some leader bindings for clojure-mode / cider commands
+(evil-leader/set-key-for-mode 'clojure-mode
+  "gj" 'cider-jump
+  "gb" 'cider-jump-back
+  "gr" 'cider-jump-to-resource
+  "ge" 'cider-jump-to-compilation-error
+  "al" 'align-cljlet
+  "cj" 'cider-jack-in
+  "cc" 'cider-connect
+  "cm1" 'cider-macroexpand-1
+  "cmm" 'cider-macroexpand-all
+  "cn" 'clojure-insert-ns-form)
+
+
 ;; Bindings for some smartparens commands
 (evil-define-key 'normal clojure-mode-map (kbd "M-j") 'sp-down-sexp)
 (evil-define-key 'normal clojure-mode-map (kbd "M-k") 'sp-backward-up-sexp)
@@ -43,15 +57,65 @@
 (evil-define-key 'normal clojure-mode-map (kbd "M-J") 'sp-join-sexp)
 (evil-define-key 'insert clojure-mode-map (kbd "M-J") 'sp-join-sexp)
 
-;; Eval last sexp
-;; (defadvice backward-sexp (around evil-cider activate)
-;;   "In normal-state, last sexp ends at point."
-;;   (if (evil-normal-state-p)
-;;       (save-excursion
-;;         (unless (or (eobp) (eolp)) (forward-char))
-;;         ad-do-it)
-;;     ad-do-it))
+(evil-leader/set-key-for-mode 'clojure-mode
+  "s" 'sp-splice-sexp
+  "J" 'sp-join-sexp
+  "S" 'sp-split-sexp
+  "r" 'sp-raise-sexp)
 
+
+;; Define versions of typical cider-eval-last-x functions to work with
+;; evil's normal mode where point is one char left from where it would
+;; be in insert mode.
+
+(defun my-clojure/do-with-append (EVAL-FUNC &optional ARGS)
+  (let ((args (if (null ARGS) nil ARGS)))
+    (cond
+     ((evil-normal-state-p)
+      (evil-append 1)
+      (apply EVAL-FUNC args)
+      (evil-normal-state)))))
+
+(defun my-clojure/eval-last-sexp ()
+  (interactive)
+  (my-clojure/do-with-append 'cider-eval-last-sexp))
+
+(defun my-clojure/pprint-eval-last-sexp ()
+  (interactive)
+  (my-clojure/do-with-append 'cider-pprint-eval-last-sexp))
+
+(defun my-clojure/eval-last-sexp-to-repl ()
+  (interactive)
+  (my-clojure/do-with-append 'cider-eval-last-sexp-to-repl))
+
+;; This has a bug that leaves sending buffer to insert mode
+(defun my-clojure/insert-last-sexp-in-repl ()
+  (interactive)
+  (my-clojure/do-with-append 'cider-insert-last-sexp-in-repl))
+
+(defun my-clojure/eval-last-sexp-and-replace ()
+  (interactive)
+  (my-clojure/do-with-append 'cider-eval-last-sexp-and-replace))
+
+(add-hook 'cider-mode-hook
+          (lambda ()
+            (define-key cider-mode-map (kbd "C-c C-e") 'my-clojure/eval-last-sexp)
+            (define-key cider-mode-map (kbd "C-c C-p") 'my-clojure/pprint-eval-last-sexp)
+            (define-key cider-mode-map (kbd "C-c M-e") 'my-clojure/eval-last-sexp-to-repl)
+            (define-key cider-mode-map (kbd "C-c M-p") 'my-clojure/insert-last-sexp-in-repl)
+            (define-key cider-mode-map (kbd "C-c C-w") 'my-clojure/eval-last-sexp-and-replace)))
+
+(evil-leader/set-key-for-mode 'clojure-mode
+  "ev" 'my-clojure/eval-last-sexp
+  "ep" 'my-clojure/pprint-eval-last-sexp
+  "er" 'my-clojure/eval-last-sexp-to-repl
+  "ei" 'my-clojure/insert-last-sexp-in-repl
+  "ew" 'my-clojure/eval-last-sexp-and-replace
+  "ek" 'cider-eval-buffer
+  "el" 'cider-load-file
+  "en" 'cider-eval-ns-form
+  "er" 'cider-eval-region
+  "et" 'cider-eval-defun-at-point)
 
 ;; Known issues:
 ;;
@@ -59,8 +123,6 @@
 ;;   - Make view doc + source under point that work the same way as
 ;;     company mode (buffer which exits when you move point)
 ;;   - evaluate to work with evil in normal mode as expected
-;;   - evil leader + bindings for smartparents commands
-;;   - clj-refactor?
 ;;
 
 (provide 'init-clojure)
