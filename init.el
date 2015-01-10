@@ -1,94 +1,21 @@
-;;; package --- My little emacs config
+;;;
+;;; My Emacs configuration.
+;;; Structure based on: https://github.com/purcell/emacs.d
 
-;;; Commentary:
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-;;; Code:
-(require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(package-initialize)
+;;----------------------------------------------------------------------------
+;; Bootstrap config
+;;----------------------------------------------------------------------------
+(require 'init-elpa)       ;; Machinery for installing required packages
+(require 'init-basic-conf) ;; Basic global configurations like toolbar disabling, indent-tabs-mode etc.
 
-;; Disable tool bar
-(tool-bar-mode -1)
-
-;; Always ask for y/n keypress instead of typing out 'yes' or 'no'
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-;; store all backup and autosave files in the tmp dir
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
-
-
-;; Show line numbers
-(global-linum-mode t)
-;; Show column number in mode line
-(setq column-number-mode t)
-
-;; By default indent with spaces only
-(setq-default indent-tabs-mode nil)
-
-;; Automatically revert buffers when files change on disk
-(global-auto-revert-mode t)
-
-(global-superword-mode 1)
-
-;; Use paths to name buffers, not just file names
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward)
-
-;; Enable the evil mode package globally
-(evil-mode 1)
-
-(defun evil-enable-symbol-word-search ()
-  "Helper to enable sane * and # behavior to use with mode hooks"
-    (setq evil-symbol-word-search t))
-
-;; Evil binds q to macro recording in many contexts. Preserve access to quit-window
-(global-set-key (kbd "C-c q") 'quit-window)
-
-;; Enable ido for better file navigation & buffer switching
-(ido-mode 1)
-(ido-vertical-mode 1)
-(setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
-(ido-everywhere 1)
-(flx-ido-mode 1) ;; Improved flex matching algorithm
-;; Disable ido faces to see flx highlights
-(setq ido-enable-flex-matching t
-      ido-use-virtual-buffers t
-      ido-use-faces nil)
-
-;; Smex for better M-x (fuzzy completion etc.)
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "C-c M-x") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-(when evil-normal-state-map
-  (define-key evil-normal-state-map (kbd "SPC SPC") 'smex))
-
-
-;; Ace jump mode to simulate EasyMotion from Vim
-(autoload 'ace-jump-mode
-          "ace-jump-mode"
-          "Emacs quick move minor mode"
-          t)
-(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
-;(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
-
-
-;; Smartparens
-(smartparens-global-mode t)
-(require 'smartparens-config)
-(sp-use-paredit-bindings)
-
-(sp-pair "(" ")" :wrap "M-(")
-(sp-pair "[" "]" :wrap "M-[")
-(sp-pair "{" "}" :wrap "M-{")
+;;----------------------------------------------------------------------------
+;; Supporting modes and packages
+;;----------------------------------------------------------------------------
+(require 'init-evil)
+(require 'init-ido-smex)
+(require 'init-smartparens)
 
 ;; Projectile for project file navigation
 (projectile-global-mode)
@@ -101,7 +28,7 @@
 (add-hook 'after-init-hook 'global-company-mode)
 
 ;; Enable global flycheck mode
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Autoload markdown mode for .md, .markdown, .text
 (autoload 'markdown-mode "markdown-mode"
@@ -119,7 +46,7 @@
 (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
 (add-hook 'clojure-mode-hook 'show-smartparens-mode)
 (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
-(add-hook 'clojure-mode-hook 'evil-enable-symbol-word-search)
+(add-hook 'clojure-mode-hook 'my-evil/enable-symbol-word-search)
 
 ;; Disable evil mode for repl and stacktrace modes
 (add-to-list 'evil-emacs-state-modes 'cider-repl-mode)
@@ -174,7 +101,7 @@
 (global-set-key (kbd "C-c r a") 'rvm-activate-corresponding-ruby)
 
 (add-hook 'ruby-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'ruby-mode-hook 'evil-enable-symbol-word-search)
+(add-hook 'ruby-mode-hook 'my-evil/enable-symbol-word-search)
 
 ;; Rebind M-. back to 'robe-jump instead of evil mode repeat
 (evil-define-key 'normal ruby-mode-map (kbd "M-.") 'robe-jump)
@@ -205,7 +132,7 @@
 ;; Emacs Lisp mode customizations
 ;;
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'emacs-lisp-mode-hook 'evil-enable-symbol-word-search)
+(add-hook 'emacs-lisp-mode-hook 'my-evil/enable-symbol-word-search)
 
 
 ;; JS mode customizations
