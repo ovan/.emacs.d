@@ -24,6 +24,9 @@
 (defun stop-highlighting-whitespace ()
   (setq show-trailing-whitespace nil))
 
+;; Setup highlighting for text mode here. Other modes are initialized at mode specific init files
+(add-hook 'text-mode-hook 'setup-highlighting-whitespace)
+
 (global-set-key (kbd "C-x t") 'clean-up-whitespace)
 
 ; Don't show line break $ in whitespace-mode

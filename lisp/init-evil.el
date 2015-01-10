@@ -9,6 +9,7 @@
 
 (defun my-evil/enable-symbol-word-search ()
   "Helper to enable sane * and # behavior to use with mode hooks"
-    (setq evil-symbol-word-search t))
+  (interactive)
+  (setq evil-symbol-word-search t))
 
 (provide 'init-evil)
