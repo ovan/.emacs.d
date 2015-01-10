@@ -8,6 +8,7 @@
 (require-package 'rspec-mode)
 (require-package 'feature-mode)
 (require-package 'yaml-mode)
+(require-package 'haml-mode)
 
 
 (add-hook 'ruby-mode-hook 'flycheck-mode)

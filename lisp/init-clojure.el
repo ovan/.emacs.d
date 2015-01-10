@@ -2,6 +2,7 @@
 
 (require-package 'clojure-mode)
 (require-package 'cider)
+(require-package 'align-cljlet)
 
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
