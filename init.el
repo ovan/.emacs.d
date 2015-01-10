@@ -16,12 +16,7 @@
 (require 'init-evil)
 (require 'init-ido-smex)
 (require 'init-smartparens)
-
-;; Projectile for project file navigation
-(projectile-global-mode)
-
-;; Ag
-(setq ag-highlight-search t)
+(require 'init-projectile)
 
 ;; Enable the company mode autocompletion for all buffers
 (require 'company)
@@ -88,6 +83,8 @@
 
 ;; Ruby development
 ;
+
+;; TODO (require-package 'projectile-rails)
 
 ; Use Flycheck with global mode instead
 ; (add-hook 'ruby-mode-hook 'flymake-ruby-load)
