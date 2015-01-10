@@ -1,6 +1,6 @@
 
 ;; Rotate windows from http://www.emacswiki.org/emacs/TransposeWindows
-(defun rotate-windows ()
+(defun my-window/rotate-windows ()
   "Rotate your windows"
   (interactive)
   (cond
@@ -22,7 +22,23 @@
           (set-window-start w2 s1)
           (setq i (1+ i))))))))
 
-(defalias 'rw 'rotate-windows)
+(defalias 'rw 'my-window/rotate-windows)
+(evil-leader/set-key "rw" 'my-window/rotate-windows)
+
+
+;; Deal with stuff that opens to other window but doesn't switch focus so you can't quit immediately
+(defun my-window/quit-in-other-window ()
+  "Run window-quit in other window and then switch back. No-op if != 2 windows"
+  (interactive)
+  (cond
+   ((not (= (count-windows) 2))
+    (message "Only applicable with exactly 2 windows!"))
+   (t
+    (other-window 1)
+    (quit-window)
+    (other-window 0))))
+
+(evil-leader/set-key "Q" 'my-window/quit-in-other-window)
 
 (provide 'init-windowmove)
 

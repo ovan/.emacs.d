@@ -1,11 +1,9 @@
 (require-package 'evil)
-
-;; Enable the evil mode package globally
-(evil-mode 1)
+(require-package 'evil-leader)
 
 ;; Evil binds q to macro recording in many contexts. Preserve access to quit-window
 (global-set-key (kbd "C-c q") 'quit-window)
-
+(evil-leader/set-key "q" 'quit-window)
 
 (defun my-evil/enable-symbol-word-search ()
   "Helper to enable using symbols, not words, for * and # behavior."
@@ -19,5 +17,12 @@
   (interactive)
   (modify-syntax-entry ?_ "w")
   (modify-syntax-entry ?- "w"))
+
+;; Use , as <leader> key, just like I do in Vim. Home sweet home.
+(evil-leader/set-leader ",")
+
+;; Enable the evil mode package globally
+(global-evil-leader-mode)
+(evil-mode 1)
 
 (provide 'init-evil)
