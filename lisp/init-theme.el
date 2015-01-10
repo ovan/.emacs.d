@@ -3,10 +3,11 @@
 ;; Load the solarized dark. Handle starting as daemon by only loading the theme
 ;; when a frame has been created.
 (if (daemonp)
-  (add-hook 'after-make-frame-functions
-            '(lambda (f)
-               (with-selected-frame f
-                 (load-theme 'solarized-dark t)))))
+    (add-hook 'after-make-frame-functions
+              (lambda (f)
+                (with-selected-frame f
+                  (set-frame-parameter f 'background-mode 'dark)
+                  (load-theme 'solarized t)))))
 
 ;; On Mac, change the font to Inconsolata
 (when (eq system-type 'darwin)
