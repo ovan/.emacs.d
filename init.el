@@ -17,20 +17,15 @@
 (require 'init-ido-smex)
 (require 'init-smartparens)
 (require 'init-projectile)
+(require 'init-ag)
+(require 'init-company)
+(require 'init-flycheck)
+;; TODO Magit
 
-;; Enable the company mode autocompletion for all buffers
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-
-;; Enable global flycheck mode
-;; (add-hook 'after-init-hook #'global-flycheck-mode)
-
-;; Autoload markdown mode for .md, .markdown, .text
-(autoload 'markdown-mode "markdown-mode"
-  "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+;;----------------------------------------------------------------------------
+;; Language / format modes
+;;----------------------------------------------------------------------------
+(require 'init-markdown)
 
 
 ;; Clojure configuration

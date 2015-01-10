@@ -1,4 +1,4 @@
-(require-packge 'ag)
+(require-package 'ag)
 
 (setq ag-highlight-search t)
 
