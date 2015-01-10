@@ -3,6 +3,7 @@
 (require-package 'clojure-mode)
 (require-package 'cider)
 (require-package 'align-cljlet)
+(require-package 'clj-refactor)
 
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
@@ -13,7 +14,7 @@
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'show-smartparens-mode)
 (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
-(add-hook 'clojure-mode-hook 'my-evil/enable-symbol-word-search)
+(add-hook 'clojure-mode-hook 'my-evil/extend-word-definition)
 (add-hook 'clojure-mode-hook 'setup-highlighting-whitespace)
 
 ;; Disable evil for repl, stacktrace, etc modes
