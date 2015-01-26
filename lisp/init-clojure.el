@@ -12,6 +12,13 @@
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
 (add-hook 'cider-repl-mode-hook 'show-smartparens-mode)
+(add-hook 'cider-repl-mode-hook
+          (lambda ()
+            (define-key cider-repl-mode-map (kbd "C-w h") 'evil-window-left)
+            (define-key cider-repl-mode-map (kbd "C-w l") 'evil-window-right)
+            (define-key cider-repl-mode-map (kbd "C-w j") 'evil-window-down)
+            (define-key cider-repl-mode-map (kbd "C-w k") 'evil-window-up)))
+
 
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'show-smartparens-mode)

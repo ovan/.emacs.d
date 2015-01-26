@@ -39,8 +39,7 @@
 
 (evil-leader/set-key
   "Q" 'my-window/quit-in-other-window
-  "rw" 'my-window/rotate-windows
-  "b" 'mode-line-other-buffer)
+  "rw" 'my-window/rotate-windows)
 
 (provide 'init-windowmove)
 

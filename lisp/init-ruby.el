@@ -21,6 +21,10 @@
 
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 
+(evil-leader/set-key-for-mode 'ruby-mode
+  "fv" 'projectile-rails-find-current-view
+  "fc" 'projectile-rails-find-current-controller)
+
 (add-to-list 'evil-emacs-state-modes 'inf-ruby-mode)
 
 
