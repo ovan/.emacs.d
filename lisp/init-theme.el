@@ -1,12 +1,14 @@
-(require-package 'color-theme-solarized)
+;; (require-package 'color-theme-solarized)
+(require-package 'zenburn-theme)
 
 ;; Use dark version always
-(setq frame-background-mode 'dark)
+;; (setq frame-background-mode 'dark)
 
 ;; Handle starting as daemon by only loading the theme when a frame has been created.
 (add-hook 'after-make-frame-functions
           (lambda (f)
-            (load-theme 'solarized t)))
+            (load-theme 'zenburn t)))
+            ;; (load-theme 'solarized t)))
 
 ;; On Mac, change the font to Inconsolata
 (when (eq system-type 'darwin)
