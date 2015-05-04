@@ -40,11 +40,11 @@
 (evil-define-key 'insert clojure-mode-map (kbd "RET") 'sp-newline)
 
 ;; Allow jumping to source
-(evil-define-key 'normal clojure-mode-map (kbd "M-.") 'cider-jump)
+(evil-define-key 'normal clojure-mode-map (kbd "M-.") 'cider-jump-to-var)
 
 ;; Some leader bindings for clojure-mode / cider commands
 (evil-leader/set-key-for-mode 'clojure-mode
-  "gj" 'cider-jump
+  "gj" 'cider-jump-to-var
   "gb" 'cider-jump-back
   "gr" 'cider-jump-to-resource
   "ge" 'cider-jump-to-compilation-error
@@ -63,13 +63,6 @@
 (evil-define-key 'insert clojure-mode-map (kbd "M-k") 'sp-backward-up-sexp)
 (evil-define-key 'normal clojure-mode-map (kbd "M-J") 'sp-join-sexp)
 (evil-define-key 'insert clojure-mode-map (kbd "M-J") 'sp-join-sexp)
-
-(evil-leader/set-key-for-mode 'clojure-mode
-  "s" 'sp-splice-sexp
-  "J" 'sp-join-sexp
-  "S" 'sp-split-sexp
-  "r" 'sp-raise-sexp)
-
 
 ;; Define versions of typical cider-eval-last-x functions to work with
 ;; evil's normal mode where point is one char left from where it would
@@ -112,6 +105,17 @@
             (define-key cider-mode-map (kbd "C-c M-p") 'my-clojure/insert-last-sexp-in-repl)
             (define-key cider-mode-map (kbd "C-c C-w") 'my-clojure/eval-last-sexp-and-replace)))
 
+;; Adapted from:
+;; https://github.com/stuartsierra/dotfiles/blob/d0d1c46ccc4fdd8d2add363615e625cc29d035b0/.emacs#L307-L312
+(defun my-clojure/cider-reset ()
+  (interactive)
+  (cider-ensure-connected)
+  (with-current-buffer (cider-current-repl-buffer)
+    (goto-char (point-max))
+    (insert "(user/reset)")
+    (cider-repl-return))
+  (message "(user/reset) called"))
+
 (evil-leader/set-key-for-mode 'clojure-mode
   "ev" 'my-clojure/eval-last-sexp
   "ep" 'my-clojure/pprint-eval-last-sexp
@@ -122,7 +126,8 @@
   "el" 'cider-load-file
   "en" 'cider-eval-ns-form
   "er" 'cider-eval-region
-  "et" 'cider-eval-defun-at-point)
+  "et" 'cider-eval-defun-at-point
+  "r"  'my-clojure/cider-reset)
 
 ;; Known issues:
 ;;
@@ -133,4 +138,3 @@
 ;;
 
 (provide 'init-clojure)
-
