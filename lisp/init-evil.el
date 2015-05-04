@@ -21,6 +21,9 @@
 ;; Use , as <leader> key, just like I do in Vim. Home sweet home.
 (evil-leader/set-leader ",")
 
+;; Leader binding for extending word definition ad hoc per buffer
+(evil-leader/set-key "ew" 'my-evil/extend-word-definition)
+
 ;; Enable the evil mode package globally
 (global-evil-leader-mode)
 (evil-mode 1)
