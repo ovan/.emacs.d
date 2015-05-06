@@ -3,9 +3,13 @@
 (require-package 'clojure-mode)
 (require-package 'cider)
 (require-package 'align-cljlet)
+(require-package 'cider-eval-sexp-fu)
 
 ;; Not spending time to learn to use this right now but maybe one day...
 ;; (require-package 'clj-refactor)
+
+;; Enable eval'd expression highlighting
+(require 'cider-eval-sexp-fu)
 
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
