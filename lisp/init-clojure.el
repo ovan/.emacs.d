@@ -114,11 +114,9 @@
 (defun my-clojure/cider-reset ()
   (interactive)
   (cider-ensure-connected)
-  (with-current-buffer (cider-current-repl-buffer)
-    (goto-char (point-max))
-    (insert "(user/reset)")
-    (cider-repl-return))
-  (message "(user/reset) called"))
+  (save-some-buffers)
+  (cider-interactive-eval
+   "(user/reset)"))
 
 (evil-leader/set-key-for-mode 'clojure-mode
   "ev" 'my-clojure/eval-last-sexp
