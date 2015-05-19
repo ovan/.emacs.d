@@ -52,3 +52,4 @@
 (require 'init-js)
 (require 'init-css)
 (require 'init-org)
+(require 'init-docker)
