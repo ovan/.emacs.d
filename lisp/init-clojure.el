@@ -4,6 +4,7 @@
 (require-package 'cider)
 (require-package 'align-cljlet)
 (require-package 'cider-eval-sexp-fu)
+(require-package 'evil-smartparens)
 
 ;; Not spending time to learn to use this right now but maybe one day...
 ;; (require-package 'clj-refactor)
@@ -29,6 +30,7 @@
 (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
 (add-hook 'clojure-mode-hook 'my-evil/extend-word-definition)
 (add-hook 'clojure-mode-hook 'setup-highlighting-whitespace)
+(add-hook 'clojure-mode-hook #'evil-smartparens-mode)
 
 ;; Disable evil for repl, stacktrace, etc modes
 (add-to-list 'evil-emacs-state-modes 'cider-repl-mode)
