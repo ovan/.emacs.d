@@ -57,6 +57,7 @@
   "al" 'align-cljlet
   "cj" 'cider-jack-in
   "cc" 'cider-connect
+  "cr" 'cider-restart
   "cm1" 'cider-macroexpand-1
   "cmm" 'cider-macroexpand-all
   "cn" 'clojure-insert-ns-form)
