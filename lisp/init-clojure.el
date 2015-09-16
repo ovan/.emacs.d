@@ -32,6 +32,10 @@
 (add-hook 'clojure-mode-hook 'setup-highlighting-whitespace)
 (add-hook 'clojure-mode-hook #'evil-smartparens-mode)
 
+;; Special indentation rules for known library forms
+(define-clojure-indent
+  (checking 2)) ; test.check / test.chuck macro
+
 ;; Disable evil for repl, stacktrace, etc modes
 (add-to-list 'evil-emacs-state-modes 'cider-repl-mode)
 (add-to-list 'evil-emacs-state-modes 'cider-stacktrace-mode)
@@ -139,7 +143,6 @@
 ;; Improvement ideas:
 ;;   - Make view doc + source under point that work the same way as
 ;;     company mode (buffer which exits when you move point)
-;;   - evaluate to work with evil in normal mode as expected
 ;;
 
 (provide 'init-clojure)
