@@ -33,8 +33,31 @@
 (add-hook 'clojure-mode-hook #'evil-smartparens-mode)
 
 ;; Special indentation rules for known library forms
-(define-clojure-indent
-  (checking 2)) ; test.check / test.chuck macro
+(add-hook 'clojure-mode-hook
+          (lambda ()
+            (define-clojure-indent
+              (checking 2)))) ; test.check / test.chuck macro
+
+;; Have fun with unicode symbols and (fn []) #() and #{}
+(add-hook 'clojure-mode-hook
+          (lambda ()
+            (font-lock-add-keywords
+             nil `(("(\\(fn\\)[\[[:space:]]"
+                    (0 (progn (compose-region (match-beginning 1)
+                                              (match-end 1) "λ")
+                              nil)))))
+
+            (font-lock-add-keywords
+             nil `(("\\(#\\)("
+                    (0 (progn (compose-region (match-beginning 1)
+                                              (match-end 1) "ƒ")
+                              nil)))))
+
+            (font-lock-add-keywords
+             nil `(("\\(#\\){"
+                    (0 (progn (compose-region (match-beginning 1)
+                                              (match-end 1) "∈")
+                              nil)))))))
 
 ;; Disable evil for repl, stacktrace, etc modes
 (add-to-list 'evil-emacs-state-modes 'cider-repl-mode)
