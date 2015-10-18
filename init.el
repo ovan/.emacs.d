@@ -33,7 +33,8 @@
 (require 'init-whitespace)
 (require 'init-windowmove)
 (require 'init-evil)
-(require 'init-ido-smex)
+;; (require 'init-ido-smex)
+(require 'init-helm)
 (require 'init-smartparens)
 (require 'init-projectile)
 (require 'init-ag)
@@ -41,6 +42,7 @@
 (require 'init-flycheck)
 (require 'init-rainbowdelimiters)
 (require 'init-magit)
+(require 'init-ace-window)
 
 ;;----------------------------------------------------------------------------
 ;; Language / format modes
