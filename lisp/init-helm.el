@@ -9,6 +9,11 @@
 ;; Bind helm version of M-x
 (global-set-key (kbd "M-x") 'helm-M-x)
 
+;; Switch around persistent action and list actions keybindings
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-z") 'helm-select-action)
+
 ;; Bind helm browse project to replace list-directory
 (global-set-key (kbd "C-x C-d") 'helm-browse-project)
 
