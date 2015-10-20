@@ -2,6 +2,15 @@
 (require-package 'projectile)
 (require-package 'helm-projectile)
 
+;; Enable globally
+(projectile-global-mode)
+
+;; Use helm as completion system
+(setq projectile-completion-system 'helm)
+
+;; Enable helm keybindings
+(helm-projectile-on)
+
 (evil-leader/set-key
   "ag" 'helm-projectile-ag
   "cpf" 'helm-projectile-find-file
@@ -9,8 +18,5 @@
   "cpt" 'projectile-toggle-between-implementation-and-test
   "cpp" 'helm-projectile-switch-project
   "ff" 'helm-projectile)
-
-;; Enable globally
-(projectile-global-mode)
 
 (provide 'init-projectile)

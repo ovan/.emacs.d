@@ -3,7 +3,6 @@
 (require-package 'rake)
 (require-package 'robe)
 (require-package 'inf-ruby)
-(require-package 'projectile-rails)
 (require-package 'rvm)
 (require-package 'rspec-mode)
 (require-package 'feature-mode)
@@ -18,12 +17,6 @@
 (add-hook 'ruby-mode-hook 'setup-highlighting-whitespace)
 
 (add-hook 'haml-mode-hook 'setup-highlighting-whitespace)
-
-(add-hook 'projectile-mode-hook 'projectile-rails-on)
-
-(evil-leader/set-key-for-mode 'ruby-mode
-  "fv" 'projectile-rails-find-current-view
-  "fc" 'projectile-rails-find-current-controller)
 
 (add-to-list 'evil-emacs-state-modes 'inf-ruby-mode)
 
