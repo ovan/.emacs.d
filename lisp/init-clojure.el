@@ -3,14 +3,11 @@
 (require-package 'clojure-mode)
 (require-package 'cider)
 (require-package 'align-cljlet)
-(require-package 'cider-eval-sexp-fu)
 (require-package 'evil-smartparens)
+(require-package 'clojure-cheatsheet)
 
 ;; Not spending time to learn to use this right now but maybe one day...
 ;; (require-package 'clj-refactor)
-
-;; Enable eval'd expression highlighting
-(require 'cider-eval-sexp-fu)
 
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
@@ -38,27 +35,6 @@
             (define-clojure-indent
               (checking 2)))) ; test.check / test.chuck macro
 
-;; Have fun with unicode symbols and (fn []) #() and #{}
-(add-hook 'clojure-mode-hook
-          (lambda ()
-            (font-lock-add-keywords
-             nil `(("(\\(fn\\)[\[[:space:]]"
-                    (0 (progn (compose-region (match-beginning 1)
-                                              (match-end 1) "λ")
-                              nil)))))
-
-            (font-lock-add-keywords
-             nil `(("\\(#\\)("
-                    (0 (progn (compose-region (match-beginning 1)
-                                              (match-end 1) "ƒ")
-                              nil)))))
-
-            (font-lock-add-keywords
-             nil `(("\\(#\\){"
-                    (0 (progn (compose-region (match-beginning 1)
-                                              (match-end 1) "∈")
-                              nil)))))))
-
 ;; Disable evil for repl, stacktrace, etc modes
 (add-to-list 'evil-emacs-state-modes 'cider-repl-mode)
 (add-to-list 'evil-emacs-state-modes 'cider-stacktrace-mode)
@@ -72,8 +48,8 @@
 ;; Make sure we use indenting newline on RET
 (evil-define-key 'insert clojure-mode-map (kbd "RET") 'sp-newline)
 
-;; Allow jumping to source
-(evil-define-key 'normal clojure-mode-map (kbd "M-.") 'cider-jump-to-var)
+;; Allow jumping to source/resource/ns
+(evil-define-key 'normal clojure-mode-map (kbd "M-.") 'cider-find-dwim)
 
 ;; Some leader bindings for clojure-mode / cider commands
 (evil-leader/set-key-for-mode 'clojure-mode
@@ -149,17 +125,18 @@
    "(user/reset)"))
 
 (evil-leader/set-key-for-mode 'clojure-mode
-  "ev" 'my-clojure/eval-last-sexp
-  "ep" 'my-clojure/pprint-eval-last-sexp
-  "er" 'my-clojure/eval-last-sexp-to-repl
-  "ei" 'my-clojure/insert-last-sexp-in-repl
-  "ew" 'my-clojure/eval-last-sexp-and-replace
-  "ek" 'cider-eval-buffer
-  "el" 'cider-load-file
-  "en" 'cider-eval-ns-form
-  "er" 'cider-eval-region
-  "et" 'cider-eval-defun-at-point
-  "r"  'my-clojure/cider-reset)
+  "ev" #'my-clojure/eval-last-sexp
+  "ep" #'my-clojure/pprint-eval-last-sexp
+  "er" #'my-clojure/eval-last-sexp-to-repl
+  "ei" #'my-clojure/insert-last-sexp-in-repl
+  "ew" #'my-clojure/eval-last-sexp-and-replace
+  "ek" #'cider-eval-buffer
+  "el" #'cider-load-file
+  "en" #'cider-eval-ns-form
+  "er" #'cider-eval-region
+  "et" #'cider-eval-defun-at-point
+  "cs" #'clojure-cheatsheet
+  "r"  #'my-clojure/cider-reset)
 
 ;; Known issues:
 ;;
