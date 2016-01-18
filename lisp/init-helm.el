@@ -24,10 +24,11 @@
 (global-set-key (kbd "C-x C-d") 'helm-browse-project)
 
 (evil-leader/set-key
- "x" 'helm-M-x
- "fb" 'helm-browse-project
- "bb" 'helm-mini
- "bs" 'mode-line-other-buffer)
+ "x" #'helm-M-x
+ "fb" #'helm-browse-project
+ "bb" #'helm-mini
+ "bs" #'mode-line-other-buffer
+ "hh" #'helm-resume)
 
 ;; Always show helm window at the bottom
 ;; https://www.reddit.com/r/emacs/comments/345vtl/make_helm_window_at_the_bottom_without_using_any/
