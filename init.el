@@ -49,9 +49,11 @@
 ;;----------------------------------------------------------------------------
 (require 'init-markdown)
 (require 'init-clojure)
+(require 'init-elixir)
 (require 'init-ruby)
 (require 'init-elisp)
 (require 'init-js)
+(require 'init-web)
 (require 'init-css)
 (require 'init-org)
 (require 'init-docker)
