@@ -4,11 +4,18 @@
 ;; Use dark version always
 ;; (setq frame-background-mode 'dark)
 
+
+;; !!! For some reason with Emacs 25.1-rc1 this hook is never
+;; !!! invoked. However, the startup time feels now fast enough that
+;; !!! let's just run without daemon mode for now.
+
 ;; Handle starting as daemon by only loading the theme when a frame has been created.
-(add-hook 'after-make-frame-functions
-          (lambda (f)
-            (load-theme 'zenburn t)))
-            ;; (load-theme 'solarized t)))
+;; (add-hook 'after-make-frame-functions
+;;           (lambda (f)
+;;             (load-theme 'zenburn t)))
+;;             ;; (load-theme 'solarized t)))
+
+(load-theme 'zenburn t)
 
 ;; On Mac, change the font to Inconsolata
 (when (eq system-type 'darwin)
