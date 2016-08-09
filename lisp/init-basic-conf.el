@@ -29,6 +29,9 @@
 ;; Disable cursor blinking
 (blink-cursor-mode -1)
 
+;; Don't show the startup screen
+(setq inhibit-startup-screen t)
+
 ;; Use paths to name buffers, not just file names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
