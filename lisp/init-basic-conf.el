@@ -26,6 +26,9 @@
 
 (global-superword-mode 1)
 
+;; Disable cursor blinking
+(blink-cursor-mode -1)
+
 ;; Use paths to name buffers, not just file names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
