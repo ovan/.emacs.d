@@ -25,7 +25,6 @@
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'show-smartparens-mode)
 (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
-(add-hook 'clojure-mode-hook 'my-evil/extend-word-definition)
 (add-hook 'clojure-mode-hook 'setup-highlighting-whitespace)
 (add-hook 'clojure-mode-hook #'evil-smartparens-mode)
 

@@ -12,7 +12,7 @@
 
 (add-hook 'ruby-mode-hook 'flycheck-mode)
 (add-hook 'ruby-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'ruby-mode-hook 'my-evil/extend-word-definition)
+;; (add-hook 'ruby-mode-hook 'my-evil/extend-word-definition)
 (add-hook 'ruby-mode-hook 'rspec-mode)
 (add-hook 'ruby-mode-hook 'setup-highlighting-whitespace)
 
