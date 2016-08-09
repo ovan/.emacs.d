@@ -9,7 +9,6 @@
 ;; Not spending time to learn to use this right now but maybe one day...
 ;; (require-package 'clj-refactor)
 
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
@@ -22,6 +21,7 @@
             (define-key cider-repl-mode-map (kbd "C-w k") 'evil-window-up)))
 
 
+(add-hook 'cider-mode-hook 'eldoc-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'show-smartparens-mode)
 (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
