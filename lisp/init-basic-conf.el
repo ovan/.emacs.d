@@ -1,5 +1,7 @@
 ;;;; Global basic confs
 
+(require-package 'nlinum-relative)
+
 ;; Disable tool bar
 (tool-bar-mode -1)
 
@@ -13,8 +15,12 @@
       `((".*" ,temporary-file-directory t)))
 
 
-;; Show line numbers
-(global-linum-mode t)
+;; Show line numbers relative to current position using nlinum-relative
+(nlinum-relative-setup-evil)
+(global-nlinum-relative-mode t)
+(evil-leader/set-key
+  "ll" 'nlinum-relative-toggle)
+
 ;; Show column number in mode line
 (setq column-number-mode t)
 
@@ -35,5 +41,13 @@
 ;; Use paths to name buffers, not just file names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
+
+;; Show the full file path in frame title instead of just file name.
+;;
+;; http://emacsredux.com/blog/2013/04/07/display-visited-files-path-in-the-frame-title/
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
 
 (provide 'init-basic-conf)
