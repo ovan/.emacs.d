@@ -6,8 +6,8 @@
 (require-package 'evil-smartparens)
 (require-package 'clojure-cheatsheet)
 
-;; Not spending time to learn to use this right now but maybe one day...
-;; (require-package 'clj-refactor)
+(require-package 'clj-refactor)
+(require-package 'cljr-helm)
 
 
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
@@ -136,6 +136,12 @@
   "et" #'cider-eval-defun-at-point
   "cs" #'clojure-cheatsheet
   "r"  #'my-clojure/cider-reset)
+
+;; Key bindings for clj refactor
+(evil-define-key 'normal clojure-mode-map (kbd "C-c C-r") #'cljr-helm)
+(evil-define-key 'insert clojure-mode-map (kbd "C-c C-r") #'cljr-helm)
+(evil-leader/set-key-for-mode 'clojure-mode
+  "cr" #'cljr-helm)
 
 ;; Known issues:
 ;;
