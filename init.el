@@ -33,6 +33,7 @@
 (require 'init-rainbowdelimiters)
 (require 'init-magit)
 (require 'init-ace-window)
+(require 'init-restclient)
 
 ;;----------------------------------------------------------------------------
 ;; Language / format modes
