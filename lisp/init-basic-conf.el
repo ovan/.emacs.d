@@ -17,7 +17,8 @@
 
 ;; Show line numbers relative to current position using nlinum-relative
 ;; (nlinum-relative-setup-evil)
-(global-nlinum-relative-mode t)
+
+;; (global-nlinum-relative-mode t) - Disabled by default
 (evil-leader/set-key
   "ll" 'nlinum-relative-toggle)
 
