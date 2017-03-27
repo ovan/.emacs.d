@@ -1,5 +1,6 @@
 ;; (require-package 'color-theme-solarized)
-(require-package 'zenburn-theme)
+;; (require-package 'dracula-theme)
+(require-package 'spacemacs-theme)
 
 ;; Use dark version always
 ;; (setq frame-background-mode 'dark)
@@ -9,13 +10,15 @@
 ;; !!! invoked. However, the startup time feels now fast enough that
 ;; !!! let's just run without daemon mode for now.
 
-;; Handle starting as daemon by only loading the theme when a frame has been created.
+;; Handle starting as daemon by only loading the theme when a frame
+;; has been created.
 ;; (add-hook 'after-make-frame-functions
 ;;           (lambda (f)
 ;;             (load-theme 'zenburn t)))
 ;;             ;; (load-theme 'solarized t)))
 
-(load-theme 'zenburn t)
+;; (load-theme 'zenburn t)
+(load-theme 'spacemacs-dark t)
 
 ;; On Mac, change the font to Inconsolata
 (when (eq system-type 'darwin)
