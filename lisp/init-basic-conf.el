@@ -2,6 +2,9 @@
 
 (require-package 'nlinum-relative)
 
+;; Add homebrew bin to exec-path
+(add-to-list 'exec-path "/usr/local/bin")
+
 ;; Disable tool bar
 (tool-bar-mode -1)
 
