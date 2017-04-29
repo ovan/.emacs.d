@@ -30,6 +30,15 @@
 ;; Use , as <leader> key, just like I do in Vim. Home sweet home.
 (evil-leader/set-leader ",")
 
+;; Map the behavior of ESC to §-key because Phil Schiller stole my
+;; hardware ESC on mbp :(.
+(global-set-key (kbd "§") 'evil-force-normal-state)
+
+;; Show line numbers relative to current position using nlinum-relative
+;; (nlinum-relative-setup-evil)
+(evil-leader/set-key
+  "ll" 'nlinum-relative-toggle)
+
 ;; Enable the evil mode package globally
 (global-evil-leader-mode)
 (evil-mode 1)

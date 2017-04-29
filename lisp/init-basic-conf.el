@@ -18,12 +18,8 @@
       `((".*" ,temporary-file-directory t)))
 
 
-;; Show line numbers relative to current position using nlinum-relative
-;; (nlinum-relative-setup-evil)
-
+(global-linum-mode t)
 ;; (global-nlinum-relative-mode t) - Disabled by default
-(evil-leader/set-key
-  "ll" 'nlinum-relative-toggle)
 
 ;; Show column number in mode line
 (setq column-number-mode t)
