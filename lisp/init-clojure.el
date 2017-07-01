@@ -143,7 +143,13 @@
 (evil-leader/set-key-for-mode 'clojure-mode
   "cr" #'cljr-helm)
 
-;; Known issues:
+;; Start Figwheel for new ClojureScript REPL session
+(setq cider-cljs-lein-repl
+  "(do (require 'figwheel-sidecar.repl-api)
+       (figwheel-sidecar.repl-api/start-figwheel!)
+       (figwheel-sidecar.repl-api/cljs-repl))")
+
+;; Known issues / ideas:
 ;;
 ;; Improvement ideas:
 ;;   - Make view doc + source under point that work the same way as
