@@ -8,6 +8,9 @@
 ;; Disable tool bar
 (tool-bar-mode -1)
 
+;; Disable scroll bar
+(scroll-bar-mode -1)
+
 ;; Always ask for y/n keypress instead of typing out 'yes' or 'no'
 (defalias 'yes-or-no-p 'y-or-n-p)
 
