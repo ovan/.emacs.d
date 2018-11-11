@@ -6,7 +6,8 @@
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta)
   (setq ns-right-command-modifier 'super)
-  (setq ns-option-modifier nil))
+  (setq ns-option-modifier nil)
+  (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 
 (provide 'init-mac)
 
