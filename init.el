@@ -15,8 +15,8 @@
 (require 'init-basic-conf) ;; Basic global configurations like toolbar disabling, indent-tabs-mode etc.
 (require 'init-mac)
 (require 'init-theme)
-(require 'init-spaceline-mode-line)
-;; (require 'init-smart-mode-line)
+;; (require 'init-spaceline-mode-line)
+(require 'init-smart-mode-line)
 
 ;;----------------------------------------------------------------------------
 ;; Supporting modes and packages
