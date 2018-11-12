@@ -28,8 +28,8 @@
 ;; Supporting modes and packages
 ;;----------------------------------------------------------------------------
 (require 'init-whitespace)
-(require 'init-windowmove)
 (require 'init-evil)
+(require 'init-windowmove)
 ;; (require 'init-ido-smex)
 (require 'init-helm)
 (require 'init-smartparens)
