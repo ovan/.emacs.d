@@ -23,7 +23,7 @@
 ;; On Mac, change the font to Inconsolata
 (when (eq system-type 'darwin)
   (custom-set-faces
-   '(default ((t (:height 140 :width normal :family "Inconsolata"))))))
+   '(default ((t (:height 150 :width normal :family "Inconsolata"))))))
 
 ; Reset background color of whitespace-mode to work with solarized
 (custom-set-faces
