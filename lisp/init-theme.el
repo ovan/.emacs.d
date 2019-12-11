@@ -1,24 +1,30 @@
-;; (require-package 'color-theme-solarized)
+(require-package 'solarized-theme)
 ;; (require-package 'dracula-theme)
-(require-package 'spacemacs-theme)
+;; (require-package 'spacemacs-theme)
+;; (require-package 'zenburn-theme)
 
-;; Use dark version always
-;; (setq frame-background-mode 'dark)
+;; Solarized configuration options
+;;
+;; make the fringe stand out from the background
+;; (setq solarized-distinct-fringe-background t)
+;; Don't change the font for some headings and titles
+;; (setq solarized-use-variable-pitch nil)
+;; make the modeline high contrast
+;; (setq solarized-high-contrast-mode-line t)
+;; Use less bolding
+;; (setq solarized-use-less-bold t)
+;; Use more italics
+;; (setq solarized-use-more-italic t)
+;; Use less colors for indicators such as git:gutter, flycheck and similar
+;; (setq solarized-emphasize-indicators nil)
 
-
-;; !!! For some reason with Emacs 25.1-rc1 this hook is never
-;; !!! invoked. However, the startup time feels now fast enough that
-;; !!! let's just run without daemon mode for now.
-
-;; Handle starting as daemon by only loading the theme when a frame
-;; has been created.
-;; (add-hook 'after-make-frame-functions
-;;           (lambda (f)
-;;             (load-theme 'zenburn t)))
-;;             ;; (load-theme 'solarized t)))
+;; Don't change size of org-mode headlines (but keep other size-changes)
+(setq solarized-scale-org-headlines nil)
 
 ;; (load-theme 'zenburn t)
-(load-theme 'spacemacs-dark t)
+;; (load-theme 'spacemacs-dark t)
+;; (load-theme 'solarized-light t)
+(load-theme 'solarized-dark t)
 
 ;; On Mac, change the font to Inconsolata
 (when (eq system-type 'darwin)
