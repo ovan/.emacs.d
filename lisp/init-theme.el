@@ -29,7 +29,7 @@
 ;; On Mac, change the font to Inconsolata
 (when (eq system-type 'darwin)
   (custom-set-faces
-   '(default ((t (:height 150 :width normal :family "Inconsolata"))))))
+   '(default ((t (:height 130 :family "JetBrains Mono"))))))
 
 ; Reset background color of whitespace-mode to work with solarized
 (custom-set-faces
